@@ -1,0 +1,15 @@
+import org.antlr.v4.runtime.*;
+
+public class Movlang {
+	public static void main(String[] args) {
+        	try {
+	            CharStream input = (CharStream) new ANTLRFileStream("test.movlang");
+        	    movlangLexer lexer = new movlangLexer(input);
+	            movlangParser parser = new movlangParser(new CommonTokenStream(lexer));
+	            parser.addParseListener(new movlangCustomListener());
+	            parser.program();
+	        } catch (IOException ex) {
+	            Logger.getLogger(Simplerlang.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+   	 }
+}
