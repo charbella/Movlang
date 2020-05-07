@@ -10,9 +10,10 @@ public class movlangCustomListener extends movlangBaseListener{
       		System.out.println("Move " + ctx.REG().get(1).getText() + " to " + ctx.REG().get(0).getText());
 	}
 
+/*
         @Override
         public void exitRegToMem(movlangParser.RegToMemContext ctx) {
                 System.out.println("Move " + ctx.REG().getText() + " to " + ctx.MEM().getText());
-        }
+        }*/
 
 }

@@ -1,1 +1,3 @@
-mov lv3, rax
+mov eax, [ebx]
+mov eax, [esi-4]
+mov [esi+eax], cl

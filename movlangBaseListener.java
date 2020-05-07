@@ -94,6 +94,30 @@ public class movlangBaseListener implements movlangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitConToMem(movlangParser.ConToMemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMem(movlangParser.MemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMem(movlangParser.MemContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAddress(movlangParser.AddressContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAddress(movlangParser.AddressContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
