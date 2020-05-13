@@ -1,3 +1,2 @@
-mov eax, [ebx]
-mov eax, [esi-4]
-mov [esi+eax], cl
+mov eax, ax
+mov dx, eax

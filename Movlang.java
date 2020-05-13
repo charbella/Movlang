@@ -10,7 +10,7 @@ public class Movlang {
 	            parser.addParseListener(new movlangCustomListener());
 	            parser.program();
 	        } catch (IOException ex) {
-	            System.out.println("failure omg");
+	            System.out.println(ex.getMessage());
 	        }
    	 }
 }
