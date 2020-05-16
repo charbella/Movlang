@@ -2,18 +2,33 @@ import java.util.*;
 
 public class movlangCustomListener extends movlangBaseListener{
 
-	private List<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>();
-	private HashMap<String, Integer> variables = new HashMap<String, Integer>();
+	private ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>(); //2d arraylist to represent adjacency list
+	private HashMap<String, Integer> variables = new HashMap<String, Integer>(); //hashmap to map each variable name to an index number
+	private int[][] tc; // To store transitive closure
+	private ArrayList<String> locations = new ArrayList<>(); //To store all variables that are considered locations
+
+	// Return the index in the adjacency list of a variable	
+	private int getIndex (String var){
+		int index;
+		//Check if var is already in variables, otherwise add it 
+		if (variables.containsKey(var)){
+			index = variables.get(var);
+		} else {
+			index = addNode(var);
+		}
+		return index;
+	}
 
 	// Add a node and store in name and adjList index in hashmap, return index
-	public int addNode(String name){
+	private int addNode(String name){
 		int index = adjList.size();
 		variables.put(name, index);
 		adjList.add(new ArrayList<Integer>());
 		return index;
 	}
 
-	public <K, V> K getKey(HashMap<K, V> map, V value) {
+	// Reverse use the hashmap to get the key (index) based on variable name
+	private <K, V> K getKey(HashMap<K, V> map, V value) {
     		for (HashMap.Entry<K, V> entry : map.entrySet()) {
 	        	if (entry.getValue().equals(value)) {
 	       			return entry.getKey();
@@ -23,7 +38,7 @@ public class movlangCustomListener extends movlangBaseListener{
 	}
 
    	// A utility function to print the adjacency list representation of graph
-	void printGraph(List<ArrayList<Integer> > adj) {
+	private void printGraph(List<ArrayList<Integer> > adj) {
         	for (int i = 0; i < adj.size(); i++) {
            		System.out.println("\nAdjacency list of vertex " + getKey(variables, i));
            		for (int j = 0; j < adj.get(i).size(); j++) {
@@ -33,33 +48,97 @@ public class movlangCustomListener extends movlangBaseListener{
            	System.out.println();
         }
 
+	// The function to find transitive closure. It uses recursive DFSUtil()
+	private void transitiveClosure() {
+		int nrOfVertices = this.variables.size();
+		this.tc = new int[nrOfVertices][nrOfVertices];
+        	for (int i = 0; i < nrOfVertices; i++) {
+            		dfsUtil(i, i); 
+        	}
+        	for (int i = 0; i < nrOfVertices; i++) {
+          		System.out.println(Arrays.toString(tc[i])); 
+        	}
+    	}
+
+   	// A recursive DFS traversal function that finds all reachable vertices for s
+	private void dfsUtil(int s, int v) {
+        // Mark reachability from s to v as true.
+        	tc[s][v] = 1;
+	        // Find all the vertices reachable through v
+	        for (int adj : adjList.get(v)) {
+	            if (tc[s][adj]==0) {
+	                dfsUtil(s, adj);
+        	    }
+        	}
+    	}
+
+	/* Override movlangBaseListener methods for custom implementation of ANTLR parser */
+
 	@Override
 	public void exitRegToReg(movlangParser.RegToRegContext ctx) {
 		String regA = ctx.REG().get(0).getText();
 		String regB = ctx.REG().get(1).getText();
-		int idxA;
-		int idxB;
-		// check if regA is already in variables, otherwise add it
-		if (variables.containsKey(regA)){
-			idxA = variables.get(regA);
-		} else {
-			idxA = addNode(regA);
-		}
-		// check if regB is already in variables, otherwise add is
-		if (variables.containsKey(regB)){
-			idxB = variables.get(regB);
-		} else {
-			idxB = addNode(regB);
-		}
-		adjList.get(idxA).add(idxB);
-		System.out.println("Move " + regB + " to " + regA + "\n");
-		System.out.println("There are " + variables.size() + " variables\n");
-		printGraph(adjList);
+		int idxA = getIndex(regA);
+		int idxB = getIndex(regB);
+		adjList.get(idxA).add(idxB); // Add constraint to adjacency list
+		System.out.println("Copy contents of " + regB + " into " + regA + "\n");
 	}
 
         @Override
         public void exitRegToMem(movlangParser.RegToMemContext ctx) {
-                System.out.println("Move " + ctx.REG().getText() + " to " + ctx.mem().address().getText());
+		String reg = ctx.REG().getText();
+		String mem = ctx.mem().address().getText();
+		int idxReg = getIndex(reg);
+		int idxMem = getIndex(mem);
+		adjList.get(idxReg).add(idxMem);
+                System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
+	}
+
+        @Override
+        public void exitMemToReg(movlangParser.MemToRegContext ctx) {
+		String mem = ctx.mem().address().getText();
+		String reg = ctx.REG().getText();
+		int idxMem = getIndex(mem);
+		int idxReg = getIndex(reg);
+		adjList.get(idxMem).add(idxReg);
+                System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
+	}
+
+        @Override
+        public void exitConToReg(movlangParser.ConToRegContext ctx) {
+		String con = ctx.CONST().getText();
+		String reg = ctx.REG().getText();
+		int idxCon = getIndex(con);
+		int idxReg = getIndex(reg);
+		adjList.get(idxCon).add(idxReg);
+		if (Integer.parseInt(con)>1000){
+			locations.add(con);
+                	System.out.println("Store the address " + con + " in " + reg);
+		} else {
+			System.out.println("Store constant " + con + " in " + reg);
+		} 
+	}
+
+        @Override
+        public void exitConToMem(movlangParser.ConToMemContext ctx) {
+		String con = ctx.CONST().getText();
+		String mem = ctx.mem().address().getText();
+		int idxCon = getIndex(con);
+		int idxMem = getIndex(mem);
+		adjList.get(idxCon).add(idxMem);
+		if (Integer.parseInt(con)>1000){
+			locations.add(con);
+                	System.out.println("Store the address " + con + " at memory location with address " + mem);
+		} else {
+			System.out.println("Store constant " + con + " at memory location with address " + mem);
+		} 
+	}
+
+	@Override
+	public void exitProgram(movlangParser.ProgramContext ctx) {
+		System.out.println("There are " + variables.size() + " variables\n");
+		printGraph(adjList);
+		transitiveClosure();
 	}
 
 }
