@@ -26,6 +26,15 @@ public class movlangCustomListener extends movlangBaseListener{
 		adjList.add(new ArrayList<Integer>());
 		return index;
 	}
+	
+	// add elements in list A to list B so that list A will be a subset of list B 
+	private void subsetOf(ArrayList<Integer> listA, ArrayList<Integer> listB){
+		if (listA.size() > 0){
+			for (int elem : listA){
+				listB.add(elem);
+			}
+		}
+	}
 
 	// Reverse use the hashmap to get the key (index) based on variable name
 	private <K, V> K getKey(HashMap<K, V> map, V value) {
@@ -40,7 +49,7 @@ public class movlangCustomListener extends movlangBaseListener{
    	// A utility function to print the adjacency list representation of graph
 	private void printGraph(List<ArrayList<Integer> > adj) {
         	for (int i = 0; i < adj.size(); i++) {
-           		System.out.println("\nAdjacency list of vertex " + getKey(variables, i));
+           		System.out.println("\nPoints-to set of " + getKey(variables, i) + " is ");
            		for (int j = 0; j < adj.get(i).size(); j++) {
                			 System.out.print(" -> "+ getKey(variables, adj.get(i).get(j)));
 			}
@@ -80,7 +89,7 @@ public class movlangCustomListener extends movlangBaseListener{
 		String regB = ctx.REG().get(1).getText();
 		int idxA = getIndex(regA);
 		int idxB = getIndex(regB);
-		adjList.get(idxA).add(idxB); // Add constraint to adjacency list
+		subsetOf(adjList.get(idxB), adjList.get(idxA));
 		System.out.println("Copy contents of " + regB + " into " + regA + "\n");
 	}
 
@@ -90,7 +99,7 @@ public class movlangCustomListener extends movlangBaseListener{
 		String mem = ctx.mem().address().getText();
 		int idxReg = getIndex(reg);
 		int idxMem = getIndex(mem);
-		adjList.get(idxReg).add(idxMem);
+		subsetOf(adjList.get(idxMem), adjList.get(idxReg));
                 System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
 	}
 
@@ -100,7 +109,7 @@ public class movlangCustomListener extends movlangBaseListener{
 		String reg = ctx.REG().getText();
 		int idxMem = getIndex(mem);
 		int idxReg = getIndex(reg);
-		adjList.get(idxMem).add(idxReg);
+		subsetOf(adjList.get(idxReg), adjList.get(idxMem));
                 System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
 	}
 
@@ -110,8 +119,8 @@ public class movlangCustomListener extends movlangBaseListener{
 		String reg = ctx.REG().getText();
 		int idxCon = getIndex(con);
 		int idxReg = getIndex(reg);
-		adjList.get(idxCon).add(idxReg);
 		if (Integer.parseInt(con)>1000){
+			adjList.get(idxReg).add(idxCon);
 			locations.add(con);
                 	System.out.println("Store the address " + con + " in " + reg);
 		} else {
@@ -125,8 +134,8 @@ public class movlangCustomListener extends movlangBaseListener{
 		String mem = ctx.mem().address().getText();
 		int idxCon = getIndex(con);
 		int idxMem = getIndex(mem);
-		adjList.get(idxCon).add(idxMem);
 		if (Integer.parseInt(con)>1000){
+			adjList.get(idxMem).add(idxCon);
 			locations.add(con);
                 	System.out.println("Store the address " + con + " at memory location with address " + mem);
 		} else {
@@ -138,7 +147,6 @@ public class movlangCustomListener extends movlangBaseListener{
 	public void exitProgram(movlangParser.ProgramContext ctx) {
 		System.out.println("There are " + variables.size() + " variables\n");
 		printGraph(adjList);
-		transitiveClosure();
 	}
 
 }
