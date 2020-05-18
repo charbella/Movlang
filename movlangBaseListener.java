@@ -39,6 +39,18 @@ public class movlangBaseListener implements movlangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInstruction(movlangParser.InstructionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInstruction(movlangParser.InstructionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRegToReg(movlangParser.RegToRegContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -111,6 +123,18 @@ public class movlangBaseListener implements movlangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLocation(movlangParser.LocationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLocation(movlangParser.LocationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAddress(movlangParser.AddressContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -118,6 +142,18 @@ public class movlangBaseListener implements movlangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAddress(movlangParser.AddressContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstant(movlangParser.ConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstant(movlangParser.ConstantContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

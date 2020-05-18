@@ -27,6 +27,16 @@ public interface movlangListener extends ParseTreeListener {
 	 */
 	void exitStatement(movlangParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link movlangParser#instruction}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstruction(movlangParser.InstructionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link movlangParser#instruction}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstruction(movlangParser.InstructionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link movlangParser#regToReg}.
 	 * @param ctx the parse tree
 	 */
@@ -87,6 +97,16 @@ public interface movlangListener extends ParseTreeListener {
 	 */
 	void exitMem(movlangParser.MemContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link movlangParser#location}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocation(movlangParser.LocationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link movlangParser#location}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocation(movlangParser.LocationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link movlangParser#address}.
 	 * @param ctx the parse tree
 	 */
@@ -96,4 +116,14 @@ public interface movlangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAddress(movlangParser.AddressContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link movlangParser#constant}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstant(movlangParser.ConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link movlangParser#constant}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstant(movlangParser.ConstantContext ctx);
 }

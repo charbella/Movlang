@@ -49,9 +49,11 @@ public class movlangCustomListener extends movlangBaseListener{
    	// A utility function to print the adjacency list representation of graph
 	private void printGraph(List<ArrayList<Integer> > adj) {
         	for (int i = 0; i < adj.size(); i++) {
-           		System.out.println("\nPoints-to set of " + getKey(variables, i) + " is ");
-           		for (int j = 0; j < adj.get(i).size(); j++) {
-               			 System.out.print(" -> "+ getKey(variables, adj.get(i).get(j)));
+			if (adj.get(i).size()>0){
+           			System.out.println("\nPoints-to set of " + getKey(variables, i) + " is ");
+           			for (int j = 0; j < adj.get(i).size(); j++) {
+               			 	System.out.print(" -> "+ getKey(variables, adj.get(i).get(j)));
+				}
 			}
 		}
            	System.out.println();
@@ -95,8 +97,13 @@ public class movlangCustomListener extends movlangBaseListener{
 
         @Override
         public void exitRegToMem(movlangParser.RegToMemContext ctx) {
+		String mem;
+		if (ctx.mem().location() != null) {
+			mem = ctx.mem().location().getText();
+		} else {
+			mem = ctx.mem().address().getText();
+		}
 		String reg = ctx.REG().getText();
-		String mem = ctx.mem().address().getText();
 		int idxReg = getIndex(reg);
 		int idxMem = getIndex(mem);
 		subsetOf(adjList.get(idxMem), adjList.get(idxReg));
@@ -105,7 +112,13 @@ public class movlangCustomListener extends movlangBaseListener{
 
         @Override
         public void exitMemToReg(movlangParser.MemToRegContext ctx) {
-		String mem = ctx.mem().address().getText();
+		String mem;
+             	if (ctx.mem().location() != null) {
+                        mem = ctx.mem().location().getText();
+                } else {
+                        mem = ctx.mem().address().getText();
+                }
+
 		String reg = ctx.REG().getText();
 		int idxMem = getIndex(mem);
 		int idxReg = getIndex(reg);
@@ -115,32 +128,45 @@ public class movlangCustomListener extends movlangBaseListener{
 
         @Override
         public void exitConToReg(movlangParser.ConToRegContext ctx) {
-		String con = ctx.CONST().getText();
 		String reg = ctx.REG().getText();
-		int idxCon = getIndex(con);
-		int idxReg = getIndex(reg);
-		if (Integer.parseInt(con)>1000){
+		String con;
+		// For now we assume that decimal numbers are constants and hexadecimal numbers are addresses
+		if (ctx.constant().DEC_NUMBER() != null) {
+			con = ctx.constant().DEC_NUMBER().getText();	// context is a decimal number
+			System.out.println("Store constant " + con + " in " + reg);
+		} else {
+			con = ctx.constant().HEX_NUMBER().getText(); // constant is of type 0xFFFFFF
+			int idxCon = getIndex(con);
+			int idxReg = getIndex(reg);
 			adjList.get(idxReg).add(idxCon);
 			locations.add(con);
                 	System.out.println("Store the address " + con + " in " + reg);
-		} else {
-			System.out.println("Store constant " + con + " in " + reg);
-		} 
+		}
 	}
 
         @Override
         public void exitConToMem(movlangParser.ConToMemContext ctx) {
-		String con = ctx.CONST().getText();
-		String mem = ctx.mem().address().getText();
-		int idxCon = getIndex(con);
-		int idxMem = getIndex(mem);
-		if (Integer.parseInt(con)>1000){
-			adjList.get(idxMem).add(idxCon);
-			locations.add(con);
-                	System.out.println("Store the address " + con + " at memory location with address " + mem);
-		} else {
-			System.out.println("Store constant " + con + " at memory location with address " + mem);
-		} 
+                String mem;
+                if (ctx.mem().location() != null) {
+                        mem = ctx.mem().location().getText();
+                } else {
+                        mem = ctx.mem().address().getText();
+                }
+
+		String con;
+                // For now we assume that decimal numbers are constants and hexadecimal numbers are addresses
+                if (ctx.constant().DEC_NUMBER() != null) {
+                        con = ctx.constant().DEC_NUMBER().getText();       // context is a decimal number
+                        System.out.println("Store constant " + con + " at memory location " + mem);
+                } else {
+                        con = ctx.constant().HEX_NUMBER().getText(); // constant is of type 0xFFFFFF
+                        int idxCon = getIndex(con);
+                        int idxMem = getIndex(mem);
+                        adjList.get(idxMem).add(idxCon);
+                        locations.add(con);
+                        System.out.println("Store the address " + con + " at memory location " + mem);
+                }
+ 
 	}
 
 	@Override
