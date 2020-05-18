@@ -1,7 +1,7 @@
 grammar movlang;
 
 program : statement+;
-statement : constant ':' instruction;
+statement : constant ':' instruction | instruction;
 
 instruction : regToReg | regToMem | memToReg | conToReg | conToMem ;
 

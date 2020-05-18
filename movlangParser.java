@@ -128,7 +128,7 @@ public class movlangParser extends Parser {
 				setState(27); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==DEC_NUMBER || _la==HEX_NUMBER );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << DEC_NUMBER) | (1L << HEX_NUMBER))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -167,14 +167,30 @@ public class movlangParser extends Parser {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_statement);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(29);
-			constant();
-			setState(30);
-			match(T__0);
-			setState(31);
-			instruction();
+			setState(34);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case DEC_NUMBER:
+			case HEX_NUMBER:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(29);
+				constant();
+				setState(30);
+				match(T__0);
+				setState(31);
+				instruction();
+				}
+				break;
+			case T__1:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(33);
+				instruction();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -222,41 +238,41 @@ public class movlangParser extends Parser {
 		InstructionContext _localctx = new InstructionContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_instruction);
 		try {
-			setState(38);
+			setState(41);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(33);
+				setState(36);
 				regToReg();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(34);
+				setState(37);
 				regToMem();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(35);
+				setState(38);
 				memToReg();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(36);
+				setState(39);
 				conToReg();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(37);
+				setState(40);
 				conToMem();
 				}
 				break;
@@ -298,13 +314,13 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
-			match(T__1);
-			setState(41);
-			match(REG);
-			setState(42);
-			match(T__2);
 			setState(43);
+			match(T__1);
+			setState(44);
+			match(REG);
+			setState(45);
+			match(T__2);
+			setState(46);
 			match(REG);
 			}
 		}
@@ -344,13 +360,13 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45);
-			match(T__1);
-			setState(46);
-			mem();
-			setState(47);
-			match(T__2);
 			setState(48);
+			match(T__1);
+			setState(49);
+			mem();
+			setState(50);
+			match(T__2);
+			setState(51);
 			match(REG);
 			}
 		}
@@ -390,13 +406,13 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
-			match(T__1);
-			setState(51);
-			match(REG);
-			setState(52);
-			match(T__2);
 			setState(53);
+			match(T__1);
+			setState(54);
+			match(REG);
+			setState(55);
+			match(T__2);
+			setState(56);
 			mem();
 			}
 		}
@@ -436,13 +452,13 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(55);
-			match(T__1);
-			setState(56);
-			match(REG);
-			setState(57);
-			match(T__2);
 			setState(58);
+			match(T__1);
+			setState(59);
+			match(REG);
+			setState(60);
+			match(T__2);
+			setState(61);
 			constant();
 			}
 		}
@@ -484,13 +500,13 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
-			match(T__1);
-			setState(61);
-			mem();
-			setState(62);
-			match(T__2);
 			setState(63);
+			match(T__1);
+			setState(64);
+			mem();
+			setState(65);
+			match(T__2);
+			setState(66);
 			constant();
 			}
 		}
@@ -530,84 +546,84 @@ public class movlangParser extends Parser {
 		MemContext _localctx = new MemContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_mem);
 		try {
-			setState(88);
+			setState(91);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__3:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(65);
+				setState(68);
 				match(T__3);
-				setState(66);
+				setState(69);
 				location();
-				setState(67);
+				setState(70);
 				match(T__4);
 				}
 				break;
 			case T__5:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(69);
+				setState(72);
 				match(T__5);
-				setState(70);
+				setState(73);
 				location();
-				setState(71);
+				setState(74);
 				match(T__4);
 				}
 				break;
 			case T__6:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(73);
+				setState(76);
 				match(T__6);
-				setState(74);
+				setState(77);
 				location();
-				setState(75);
+				setState(78);
 				match(T__4);
 				}
 				break;
 			case T__7:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(77);
+				setState(80);
 				match(T__7);
-				setState(78);
+				setState(81);
 				location();
-				setState(79);
+				setState(82);
 				match(T__4);
 				}
 				break;
 			case T__14:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(81);
+				setState(84);
 				address();
 				}
 				break;
 			case T__8:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(82);
+				setState(85);
 				match(T__8);
-				setState(83);
+				setState(86);
 				address();
 				}
 				break;
 			case T__9:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(84);
+				setState(87);
 				match(T__9);
-				setState(85);
+				setState(88);
 				address();
 				}
 				break;
 			case T__10:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(86);
+				setState(89);
 				match(T__10);
-				setState(87);
+				setState(90);
 				address();
 				}
 				break;
@@ -655,87 +671,87 @@ public class movlangParser extends Parser {
 		LocationContext _localctx = new LocationContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_location);
 		try {
-			setState(114);
+			setState(117);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(90);
+				setState(93);
 				match(REG);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(91);
+				setState(94);
 				match(REG);
-				setState(92);
+				setState(95);
 				match(T__11);
-				setState(93);
+				setState(96);
 				constant();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(94);
+				setState(97);
 				match(REG);
-				setState(95);
+				setState(98);
 				match(T__12);
-				setState(96);
+				setState(99);
 				constant();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(97);
+				setState(100);
 				match(REG);
-				setState(98);
+				setState(101);
 				match(T__11);
-				setState(99);
+				setState(102);
 				match(REG);
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(100);
+				setState(103);
 				match(REG);
-				setState(101);
+				setState(104);
 				match(T__12);
-				setState(102);
+				setState(105);
 				match(REG);
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(103);
-				match(REG);
-				setState(104);
-				match(T__11);
-				setState(105);
-				match(REG);
 				setState(106);
-				match(T__13);
+				match(REG);
 				setState(107);
-				constant();
-				}
-				break;
-			case 7:
-				enterOuterAlt(_localctx, 7);
-				{
+				match(T__11);
 				setState(108);
 				match(REG);
 				setState(109);
 				match(T__13);
 				setState(110);
 				constant();
+				}
+				break;
+			case 7:
+				enterOuterAlt(_localctx, 7);
+				{
 				setState(111);
-				match(T__11);
+				match(REG);
 				setState(112);
+				match(T__13);
+				setState(113);
+				constant();
+				setState(114);
+				match(T__11);
+				setState(115);
 				constant();
 				}
 				break;
@@ -774,9 +790,9 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(116);
+			setState(119);
 			match(T__14);
-			setState(117);
+			setState(120);
 			match(HEX_NUMBER);
 			}
 		}
@@ -815,7 +831,7 @@ public class movlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(119);
+			setState(122);
 			_la = _input.LA(1);
 			if ( !(_la==DEC_NUMBER || _la==HEX_NUMBER) ) {
 			_errHandler.recoverInline(this);
@@ -839,36 +855,37 @@ public class movlangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27|\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\4\r\t\r\3\2\6\2\34\n\2\r\2\16\2\35\3\3\3\3\3\3\3\3\3\4\3\4\3\4"+
-		"\3\4\3\4\5\4)\n\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7"+
-		"\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27\177\4\2\t\2\4"+
+		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
+		"\13\4\f\t\f\4\r\t\r\3\2\6\2\34\n\2\r\2\16\2\35\3\3\3\3\3\3\3\3\3\3\5\3"+
+		"%\n\3\3\4\3\4\3\4\3\4\3\4\5\4,\n\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6"+
+		"\3\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\n\3"+
 		"\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n"+
-		"\5\n[\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13u\n\13"+
-		"\3\f\3\f\3\f\3\r\3\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\3\3\2"+
-		"\23\24\2\u0081\2\33\3\2\2\2\4\37\3\2\2\2\6(\3\2\2\2\b*\3\2\2\2\n/\3\2"+
-		"\2\2\f\64\3\2\2\2\169\3\2\2\2\20>\3\2\2\2\22Z\3\2\2\2\24t\3\2\2\2\26v"+
-		"\3\2\2\2\30y\3\2\2\2\32\34\5\4\3\2\33\32\3\2\2\2\34\35\3\2\2\2\35\33\3"+
-		"\2\2\2\35\36\3\2\2\2\36\3\3\2\2\2\37 \5\30\r\2 !\7\3\2\2!\"\5\6\4\2\""+
-		"\5\3\2\2\2#)\5\b\5\2$)\5\n\6\2%)\5\f\7\2&)\5\16\b\2\')\5\20\t\2(#\3\2"+
-		"\2\2($\3\2\2\2(%\3\2\2\2(&\3\2\2\2(\'\3\2\2\2)\7\3\2\2\2*+\7\4\2\2+,\7"+
-		"\22\2\2,-\7\5\2\2-.\7\22\2\2.\t\3\2\2\2/\60\7\4\2\2\60\61\5\22\n\2\61"+
-		"\62\7\5\2\2\62\63\7\22\2\2\63\13\3\2\2\2\64\65\7\4\2\2\65\66\7\22\2\2"+
-		"\66\67\7\5\2\2\678\5\22\n\28\r\3\2\2\29:\7\4\2\2:;\7\22\2\2;<\7\5\2\2"+
-		"<=\5\30\r\2=\17\3\2\2\2>?\7\4\2\2?@\5\22\n\2@A\7\5\2\2AB\5\30\r\2B\21"+
-		"\3\2\2\2CD\7\6\2\2DE\5\24\13\2EF\7\7\2\2F[\3\2\2\2GH\7\b\2\2HI\5\24\13"+
-		"\2IJ\7\7\2\2J[\3\2\2\2KL\7\t\2\2LM\5\24\13\2MN\7\7\2\2N[\3\2\2\2OP\7\n"+
-		"\2\2PQ\5\24\13\2QR\7\7\2\2R[\3\2\2\2S[\5\26\f\2TU\7\13\2\2U[\5\26\f\2"+
-		"VW\7\f\2\2W[\5\26\f\2XY\7\r\2\2Y[\5\26\f\2ZC\3\2\2\2ZG\3\2\2\2ZK\3\2\2"+
-		"\2ZO\3\2\2\2ZS\3\2\2\2ZT\3\2\2\2ZV\3\2\2\2ZX\3\2\2\2[\23\3\2\2\2\\u\7"+
-		"\22\2\2]^\7\22\2\2^_\7\16\2\2_u\5\30\r\2`a\7\22\2\2ab\7\17\2\2bu\5\30"+
-		"\r\2cd\7\22\2\2de\7\16\2\2eu\7\22\2\2fg\7\22\2\2gh\7\17\2\2hu\7\22\2\2"+
-		"ij\7\22\2\2jk\7\16\2\2kl\7\22\2\2lm\7\20\2\2mu\5\30\r\2no\7\22\2\2op\7"+
-		"\20\2\2pq\5\30\r\2qr\7\16\2\2rs\5\30\r\2su\3\2\2\2t\\\3\2\2\2t]\3\2\2"+
-		"\2t`\3\2\2\2tc\3\2\2\2tf\3\2\2\2ti\3\2\2\2tn\3\2\2\2u\25\3\2\2\2vw\7\21"+
-		"\2\2wx\7\24\2\2x\27\3\2\2\2yz\t\2\2\2z\31\3\2\2\2\6\35(Zt";
+		"\3\n\3\n\3\n\3\n\5\n^\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\5\13x\n\13\3\f\3\f\3\f\3\r\3\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24"+
+		"\26\30\2\3\3\2\23\24\2\u0085\2\33\3\2\2\2\4$\3\2\2\2\6+\3\2\2\2\b-\3\2"+
+		"\2\2\n\62\3\2\2\2\f\67\3\2\2\2\16<\3\2\2\2\20A\3\2\2\2\22]\3\2\2\2\24"+
+		"w\3\2\2\2\26y\3\2\2\2\30|\3\2\2\2\32\34\5\4\3\2\33\32\3\2\2\2\34\35\3"+
+		"\2\2\2\35\33\3\2\2\2\35\36\3\2\2\2\36\3\3\2\2\2\37 \5\30\r\2 !\7\3\2\2"+
+		"!\"\5\6\4\2\"%\3\2\2\2#%\5\6\4\2$\37\3\2\2\2$#\3\2\2\2%\5\3\2\2\2&,\5"+
+		"\b\5\2\',\5\n\6\2(,\5\f\7\2),\5\16\b\2*,\5\20\t\2+&\3\2\2\2+\'\3\2\2\2"+
+		"+(\3\2\2\2+)\3\2\2\2+*\3\2\2\2,\7\3\2\2\2-.\7\4\2\2./\7\22\2\2/\60\7\5"+
+		"\2\2\60\61\7\22\2\2\61\t\3\2\2\2\62\63\7\4\2\2\63\64\5\22\n\2\64\65\7"+
+		"\5\2\2\65\66\7\22\2\2\66\13\3\2\2\2\678\7\4\2\289\7\22\2\29:\7\5\2\2:"+
+		";\5\22\n\2;\r\3\2\2\2<=\7\4\2\2=>\7\22\2\2>?\7\5\2\2?@\5\30\r\2@\17\3"+
+		"\2\2\2AB\7\4\2\2BC\5\22\n\2CD\7\5\2\2DE\5\30\r\2E\21\3\2\2\2FG\7\6\2\2"+
+		"GH\5\24\13\2HI\7\7\2\2I^\3\2\2\2JK\7\b\2\2KL\5\24\13\2LM\7\7\2\2M^\3\2"+
+		"\2\2NO\7\t\2\2OP\5\24\13\2PQ\7\7\2\2Q^\3\2\2\2RS\7\n\2\2ST\5\24\13\2T"+
+		"U\7\7\2\2U^\3\2\2\2V^\5\26\f\2WX\7\13\2\2X^\5\26\f\2YZ\7\f\2\2Z^\5\26"+
+		"\f\2[\\\7\r\2\2\\^\5\26\f\2]F\3\2\2\2]J\3\2\2\2]N\3\2\2\2]R\3\2\2\2]V"+
+		"\3\2\2\2]W\3\2\2\2]Y\3\2\2\2][\3\2\2\2^\23\3\2\2\2_x\7\22\2\2`a\7\22\2"+
+		"\2ab\7\16\2\2bx\5\30\r\2cd\7\22\2\2de\7\17\2\2ex\5\30\r\2fg\7\22\2\2g"+
+		"h\7\16\2\2hx\7\22\2\2ij\7\22\2\2jk\7\17\2\2kx\7\22\2\2lm\7\22\2\2mn\7"+
+		"\16\2\2no\7\22\2\2op\7\20\2\2px\5\30\r\2qr\7\22\2\2rs\7\20\2\2st\5\30"+
+		"\r\2tu\7\16\2\2uv\5\30\r\2vx\3\2\2\2w_\3\2\2\2w`\3\2\2\2wc\3\2\2\2wf\3"+
+		"\2\2\2wi\3\2\2\2wl\3\2\2\2wq\3\2\2\2x\25\3\2\2\2yz\7\21\2\2z{\7\24\2\2"+
+		"{\27\3\2\2\2|}\t\2\2\2}\31\3\2\2\2\7\35$+]w";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -30,7 +30,8 @@ public class movlangCustomListener extends movlangBaseListener{
 	// add elements in list A to list B so that list A will be a subset of list B 
 	private void subsetOf(ArrayList<Integer> listA, ArrayList<Integer> listB){
 		if (listA.size() > 0){
-			for (int elem : listA){
+			for(Iterator<Integer> listIterator = listA.iterator(); listIterator.hasNext();){			
+				int elem = listIterator.next();				
 				listB.add(elem);
 			}
 		}
@@ -59,29 +60,6 @@ public class movlangCustomListener extends movlangBaseListener{
            	System.out.println();
         }
 
-	// The function to find transitive closure. It uses recursive DFSUtil()
-	private void transitiveClosure() {
-		int nrOfVertices = this.variables.size();
-		this.tc = new int[nrOfVertices][nrOfVertices];
-        	for (int i = 0; i < nrOfVertices; i++) {
-            		dfsUtil(i, i); 
-        	}
-        	for (int i = 0; i < nrOfVertices; i++) {
-          		System.out.println(Arrays.toString(tc[i])); 
-        	}
-    	}
-
-   	// A recursive DFS traversal function that finds all reachable vertices for s
-	private void dfsUtil(int s, int v) {
-        // Mark reachability from s to v as true.
-        	tc[s][v] = 1;
-	        // Find all the vertices reachable through v
-	        for (int adj : adjList.get(v)) {
-	            if (tc[s][adj]==0) {
-	                dfsUtil(s, adj);
-        	    }
-        	}
-    	}
 
 	/* Override movlangBaseListener methods for custom implementation of ANTLR parser */
 
@@ -92,7 +70,7 @@ public class movlangCustomListener extends movlangBaseListener{
 		int idxA = getIndex(regA);
 		int idxB = getIndex(regB);
 		subsetOf(adjList.get(idxB), adjList.get(idxA));
-		System.out.println("Copy contents of " + regB + " into " + regA + "\n");
+		//System.out.println("Copy contents of " + regB + " into " + regA + "\n");
 	}
 
         @Override
@@ -101,13 +79,13 @@ public class movlangCustomListener extends movlangBaseListener{
 		if (ctx.mem().location() != null) {
 			mem = ctx.mem().location().getText();
 		} else {
-			mem = ctx.mem().address().getText();
+			mem = ctx.mem().address().HEX_NUMBER().getText();
 		}
 		String reg = ctx.REG().getText();
 		int idxReg = getIndex(reg);
 		int idxMem = getIndex(mem);
 		subsetOf(adjList.get(idxMem), adjList.get(idxReg));
-                System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
+                //System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
 	}
 
         @Override
@@ -116,14 +94,14 @@ public class movlangCustomListener extends movlangBaseListener{
              	if (ctx.mem().location() != null) {
                         mem = ctx.mem().location().getText();
                 } else {
-                        mem = ctx.mem().address().getText();
+                        mem = ctx.mem().address().HEX_NUMBER().getText();
                 }
 
 		String reg = ctx.REG().getText();
 		int idxMem = getIndex(mem);
 		int idxReg = getIndex(reg);
 		subsetOf(adjList.get(idxReg), adjList.get(idxMem));
-                System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
+                //System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
 	}
 
         @Override
@@ -140,7 +118,7 @@ public class movlangCustomListener extends movlangBaseListener{
 			int idxReg = getIndex(reg);
 			adjList.get(idxReg).add(idxCon);
 			locations.add(con);
-                	System.out.println("Store the address " + con + " in " + reg);
+                	//System.out.println("Store the address " + con + " in " + reg);
 		}
 	}
 
@@ -150,28 +128,28 @@ public class movlangCustomListener extends movlangBaseListener{
                 if (ctx.mem().location() != null) {
                         mem = ctx.mem().location().getText();
                 } else {
-                        mem = ctx.mem().address().getText();
+                        mem = ctx.mem().address().HEX_NUMBER().getText();
                 }
 
 		String con;
                 // For now we assume that decimal numbers are constants and hexadecimal numbers are addresses
                 if (ctx.constant().DEC_NUMBER() != null) {
                         con = ctx.constant().DEC_NUMBER().getText();       // context is a decimal number
-                        System.out.println("Store constant " + con + " at memory location " + mem);
+                        //System.out.println("Store constant " + con + " at memory location " + mem);
                 } else {
                         con = ctx.constant().HEX_NUMBER().getText(); // constant is of type 0xFFFFFF
                         int idxCon = getIndex(con);
                         int idxMem = getIndex(mem);
                         adjList.get(idxMem).add(idxCon);
                         locations.add(con);
-                        System.out.println("Store the address " + con + " at memory location " + mem);
+                        //System.out.println("Store the address " + con + " at memory location " + mem);
                 }
  
 	}
 
 	@Override
 	public void exitProgram(movlangParser.ProgramContext ctx) {
-		System.out.println("There are " + variables.size() + " variables\n");
+		//System.out.println("There are " + variables.size() + " variables\n");
 		printGraph(adjList);
 	}
 
