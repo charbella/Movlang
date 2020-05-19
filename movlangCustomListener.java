@@ -70,7 +70,7 @@ public class movlangCustomListener extends movlangBaseListener{
 		int idxA = getIndex(regA);
 		int idxB = getIndex(regB);
 		subsetOf(adjList.get(idxB), adjList.get(idxA));
-		//System.out.println("Copy contents of " + regB + " into " + regA + "\n");
+		System.out.println("Copy contents of " + regB + " into " + regA + "\n");
 	}
 
         @Override
@@ -84,8 +84,8 @@ public class movlangCustomListener extends movlangBaseListener{
 		String reg = ctx.REG().getText();
 		int idxReg = getIndex(reg);
 		int idxMem = getIndex(mem);
-		subsetOf(adjList.get(idxMem), adjList.get(idxReg));
-                //System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
+		subsetOf(adjList.get(idxReg), adjList.get(idxMem));
+                System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
 	}
 
         @Override
@@ -100,8 +100,8 @@ public class movlangCustomListener extends movlangBaseListener{
 		String reg = ctx.REG().getText();
 		int idxMem = getIndex(mem);
 		int idxReg = getIndex(reg);
-		subsetOf(adjList.get(idxReg), adjList.get(idxMem));
-                //System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
+		subsetOf(adjList.get(idxMem), adjList.get(idxReg));
+                System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
 	}
 
         @Override
@@ -118,7 +118,7 @@ public class movlangCustomListener extends movlangBaseListener{
 			int idxReg = getIndex(reg);
 			adjList.get(idxReg).add(idxCon);
 			locations.add(con);
-                	//System.out.println("Store the address " + con + " in " + reg);
+                	System.out.println("Store the address " + con + " in " + reg);
 		}
 	}
 
@@ -142,14 +142,14 @@ public class movlangCustomListener extends movlangBaseListener{
                         int idxMem = getIndex(mem);
                         adjList.get(idxMem).add(idxCon);
                         locations.add(con);
-                        //System.out.println("Store the address " + con + " at memory location " + mem);
+                        System.out.println("Store the address " + con + " at memory location " + mem);
                 }
  
 	}
 
 	@Override
 	public void exitProgram(movlangParser.ProgramContext ctx) {
-		//System.out.println("There are " + variables.size() + " variables\n");
+		System.out.println("There are " + variables.size() + " variables\n");
 		printGraph(adjList);
 	}
 

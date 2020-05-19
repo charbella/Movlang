@@ -1,1 +1,153 @@
-mov DWORD PTR ds:0x4008, 0x4000
+80482d7:	mov    esp,DWORD PTR ds:0x83f4120
+ 80482dd:	mov    eax,ds:0x83f414c
+ 80482e2:	mov    eax,DWORD PTR [eax*4+0x83f4140]
+ 80482e9:	mov    DWORD PTR [eax],0x1
+ 80482ef:	mov    DWORD PTR ds:0x83f414c,0x0
+ 80482f9:	mov    eax,ds:0x83f4130
+ 80482fe:	mov    edx,0x4
+ 8048303:	mov    ds:0x81f3fe0,eax
+ 8048308:	mov    DWORD PTR ds:0x81f3fe4,edx
+ 804830e:	mov    eax,0x0
+ 8048313:	mov    ecx,0x0
+ 8048318:	mov    DWORD PTR ds:0x81f3ff0,0x0
+ 8048322:	mov    ax,ds:0x81f3fe0
+ 8048328:	mov    cx,WORD PTR ds:0x81f3fe4
+ 804832f:	mov    edx,DWORD PTR [eax*4+0x805ef20]
+ 8048336:	mov    edx,DWORD PTR [edx+ecx*4]
+ 8048339:	mov    cx,WORD PTR ds:0x81f3ff2
+ 8048340:	mov    edx,DWORD PTR [edx*4+0x805ef20]
+ 8048347:	mov    edx,DWORD PTR [edx+ecx*4]
+ 804834a:	mov    WORD PTR ds:0x81f3fe8,dx
+ 8048351:	mov    DWORD PTR ds:0x81f3ff0,edx
+ 8048357:	mov    ax,ds:0x81f3fe2
+ 804835d:	mov    cx,WORD PTR ds:0x81f3fe6
+ 8048364:	mov    edx,DWORD PTR [eax*4+0x805ef20]
+ 804836b:	mov    edx,DWORD PTR [edx+ecx*4]
+ 804836e:	mov    cx,WORD PTR ds:0x81f3ff2
+ 8048375:	mov    edx,DWORD PTR [edx*4+0x805ef20]
+ 804837c:	mov    edx,DWORD PTR [edx+ecx*4]
+ 804837f:	mov    WORD PTR ds:0x81f3fea,dx
+ 8048386:	mov    DWORD PTR ds:0x81f3ff0,edx
+ 804838c:	mov    eax,ds:0x81f3fe8
+ 8048391:	mov    eax,eax
+ 8048393:	mov    ds:0x81f4100,eax
+ 8048398:	mov    eax,0x83f4120
+ 804839d:	mov    edx,DWORD PTR ds:0x83f4148
+ 80483a3:	mov    ds:0x83f4164,eax
+ 80483a8:	mov    eax,DWORD PTR [edx*4+0x83f4160]
+ 80483af:	mov    edx,DWORD PTR ds:0x83f4120
+ 80483b5:	mov    edx,DWORD PTR [edx-0x200068]
+ 80483bb:	mov    DWORD PTR [eax],edx
+ 80483bd:	mov    eax,ds:0x83f4120
+ 80483c2:	mov    edx,DWORD PTR ds:0x83f4148
+ 80483c8:	mov    ds:0x83f4164,eax
+ 80483cd:	mov    eax,DWORD PTR [edx*4+0x83f4160]
+ 80483d4:	mov    edx,DWORD PTR ds:0x81f4100
+ 80483da:	mov    DWORD PTR [eax],edx
+ 80483dc:	mov    eax,ds:0x83f4130
+ 80483e1:	mov    eax,DWORD PTR [eax]
+ 80483e3:	mov    eax,eax
+ 80483e5:	mov    ds:0x81f4100,eax
+ 80483ea:	mov    eax,0x83f4120
+ 80483ef:	mov    edx,DWORD PTR ds:0x83f4148
+ 80483f5:	mov    ds:0x83f4164,eax
+ 80483fa:	mov    eax,DWORD PTR [edx*4+0x83f4160]
+ 8048401:	mov    edx,DWORD PTR ds:0x83f4120
+ 8048407:	mov    edx,DWORD PTR [edx-0x200068]
+ 804840d:	mov    DWORD PTR [eax],edx
+ 804840f:	mov    eax,ds:0x83f4120
+ 8048414:	mov    edx,DWORD PTR ds:0x83f4148
+ 804841a:	mov    ds:0x83f4164,eax
+ 804841f:	mov    eax,DWORD PTR [edx*4+0x83f4160]
+ 8048426:	mov    edx,DWORD PTR ds:0x81f4100
+ 804842c:	mov    DWORD PTR [eax],edx
+ 804842e:	mov    eax,0x88048559
+ 8048433:	mov    eax,eax
+ 8048435:	mov    ds:0x81f4100,eax
+ 804843a:	mov    eax,0x83f4120
+ 804843f:	mov    edx,DWORD PTR ds:0x83f4148
+ 8048445:	mov    ds:0x83f4164,eax
+ 804844a:	mov    eax,DWORD PTR [edx*4+0x83f4160]
+ 8048451:	mov    edx,DWORD PTR ds:0x83f4120
+ 8048457:	mov    edx,DWORD PTR [edx-0x200068]
+ 804845d:	mov    DWORD PTR [eax],edx
+ 804845f:	mov    eax,ds:0x83f4120
+ 8048464:	mov    edx,DWORD PTR ds:0x83f4148
+ 804846a:	mov    ds:0x83f4164,eax
+ 804846f:	mov    eax,DWORD PTR [edx*4+0x83f4160]
+ 8048476:	mov    edx,DWORD PTR ds:0x81f4100
+ 804847c:	mov    DWORD PTR [eax],edx
+ 804847e:	mov    eax,0x880487da
+ 8048483:	mov    ds:0x81f40f0,eax
+ 8048488:	mov    eax,ds:0x83f4148
+ 804848d:	mov    eax,DWORD PTR [eax*4+0x83f4150]
+ 8048494:	mov    edx,DWORD PTR ds:0x81f40f0
+ 804849a:	mov    DWORD PTR [eax],edx
+ 804849c:	mov    ecx,DWORD PTR ds:0x83f4148
+ 80484a2:	mov    DWORD PTR ds:0x83f4164,0x85f4180
+ 80484ac:	mov    eax,DWORD PTR [ecx*4+0x83f4160]
+ 80484b3:	mov    edx,DWORD PTR ds:0x804b030
+ 80484b9:	mov    DWORD PTR [eax],edx
+ 80484bb:	mov    edx,DWORD PTR ds:0x804b034
+ 80484c1:	mov    DWORD PTR [eax+0x4],edx
+ 80484c4:	mov    edx,DWORD PTR ds:0x804b038
+ 80484ca:	mov    DWORD PTR [eax+0x8],edx
+ 80484cd:	mov    edx,DWORD PTR ds:0x804b03c
+ 80484d3:	mov    DWORD PTR [eax+0xc],edx
+ 80484d6:	mov    DWORD PTR ds:0x83f4164,0x85f4190
+ 80484e0:	mov    eax,DWORD PTR [ecx*4+0x83f4160]
+ 80484e7:	mov    edx,DWORD PTR ds:0x804b040
+ 80484ed:	mov    DWORD PTR [eax],edx
+ 80484ef:	mov    edx,DWORD PTR ds:0x804b044
+ 80484f5:	mov    DWORD PTR [eax+0x4],edx
+ 80484f8:	mov    edx,DWORD PTR ds:0x804b048
+ 80484fe:	mov    DWORD PTR [eax+0x8],edx
+ 8048501:	mov    DWORD PTR ds:0x83f4164,0x85f419c
+ 804850b:	mov    eax,DWORD PTR [ecx*4+0x83f4160]
+ 8048512:	mov    edx,DWORD PTR ds:0x804b050
+ 8048518:	mov    DWORD PTR [eax],edx
+ 804851a:	mov    edx,DWORD PTR ds:0x804b054
+ 8048520:	mov    DWORD PTR [eax+0x4],edx
+ 8048523:	mov    edx,DWORD PTR ds:0x804b058
+ 8048529:	mov    DWORD PTR [eax+0x8],edx
+ 804852c:	mov    edx,DWORD PTR ds:0x804b05c
+ 8048532:	mov    DWORD PTR [eax+0xc],edx
+ 8048535:	mov    edx,DWORD PTR ds:0x804b060
+ 804853b:	mov    DWORD PTR [eax+0x10],edx
+ 804853e:	mov    edx,DWORD PTR ds:0x804b064
+ 8048544:	mov    DWORD PTR [eax+0x14],edx
+ 8048547:	mov    eax,ds:0x83f4148
+ 804854c:	mov    eax,DWORD PTR [eax*4+0x83f4140]
+ 8048553:	mov    DWORD PTR [eax],0x0
+ 8048559:	mov    eax,ds:0x83f4158
+ 804855e:	mov    edx,0x88048559
+ 8048563:	mov    ds:0x81f3fe0,eax
+ 8048568:	mov    DWORD PTR ds:0x81f3fe4,edx
+ 804856e:	mov    eax,0x0
+ 8048573:	mov    ecx,0x0
+ 8048578:	mov    edx,0x0
+ 804857d:	mov    al,ds:0x81f3fe0
+ 8048582:	mov    ecx,DWORD PTR [eax*4+0x804e5f0]
+ 8048589:	mov    dl,BYTE PTR ds:0x81f3fe4
+ 804858f:	mov    dl,BYTE PTR [ecx+edx*1]
+ 8048592:	mov    DWORD PTR ds:0x81f3fd0,edx
+ 8048598:	mov    al,ds:0x81f3fe1
+ 804859d:	mov    ecx,DWORD PTR [eax*4+0x804e5f0]
+ 80485a4:	mov    dl,BYTE PTR ds:0x81f3fe5
+ 80485aa:	mov    dl,BYTE PTR [ecx+edx*1]
+ 80485ad:	mov    DWORD PTR ds:0x81f3fd4,edx
+ 80485b3:	mov    al,ds:0x81f3fe2
+ 80485b8:	mov    ecx,DWORD PTR [eax*4+0x804e5f0]
+ 80485bf:	mov    dl,BYTE PTR ds:0x81f3fe6
+ 80485c5:	mov    dl,BYTE PTR [ecx+edx*1]
+ 80485c8:	mov    DWORD PTR ds:0x81f3fd8,edx
+ 80485ce:	mov    al,ds:0x81f3fe3
+ 80485d3:	mov    ecx,DWORD PTR [eax*4+0x804e5f0]
+ 80485da:	mov    dl,BYTE PTR ds:0x81f3fe7
+ 80485e0:	mov    dl,BYTE PTR [ecx+edx*1]
+ 80485e3:	mov    DWORD PTR ds:0x81f3fdc,edx
+ 80485e9:	mov    eax,ds:0x81f3fd0
+ 80485ee:	mov    edx,DWORD PTR ds:0x81f3fd4
+ 80485f4:	mov    eax,DWORD PTR [eax*4+0x804b090]
+ 80485fb:	mov    eax,DWORD PTR [eax+edx*4]
+ 80485fe:	mov    ds:0x81f3fd0,eax
