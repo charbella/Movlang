@@ -2,6 +2,7 @@ import org.antlr.v4.runtime.*;
 import java.io.*;
 
 public class Movlang {
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
         	try {
 	            CharStream input = (CharStream) new ANTLRFileStream("test.movlang");

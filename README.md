@@ -3,7 +3,7 @@ This project is a java implementation of pointer analysis for Movlang, a languag
 We use ANTLR lexer and parser to parse the code. 
 movlang.g4 contains the grammar of Movlang.
 
-HOW TO USE
+# How to use
 
 Generate parser for grammar (run this command when changes are made to the grammar):
 java -jar antlr-4.7.1-complete.jar movlang.g4
@@ -19,7 +19,7 @@ java -cp .:antlr-4.7.1-complete.jar org.antlr.v4.gui.TestRig movlang program -gu
 Execute pointer analysis:
 java -cp .:antlr-4.7.1-complete.jar Movlang
 
-EXAMPLES
+# Examples
 
 Example 1
 input:

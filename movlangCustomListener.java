@@ -1,16 +1,26 @@
 import java.util.*;
+/* 
+Graph is stored as adjacencylist
+*/
 
 public class movlangCustomListener extends movlangBaseListener{
 
-	private ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>(); //2d arraylist to represent adjacency list
-	private HashMap<String, Integer> variables = new HashMap<String, Integer>(); //hashmap to map each variable name to an index number
-	private int[][] tc; // To store transitive closure
-	private ArrayList<String> locations = new ArrayList<>(); //To store all variables that are considered locations
+	private ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>(); 	// 2d arraylist to represent adjacency list
+	private HashMap<String, Integer> variables = new HashMap<String, Integer>(); 		// hashmap to map each variable name to an adjacency list index
+	private ArrayList<String[]> subsetConstraints = new ArrayList<>(); 			// Store subset constraints as list of arrays [a,b] where a is subset of b
 
-	// Return the index in the adjacency list of a variable	
+	// Add a node and store name and adjList index in hashmap, return index
+	private int addNode(String name){
+		int index = adjList.size();
+		variables.put(name, index);
+		adjList.add(new ArrayList<Integer>());
+		return index;
+	}
+		
+	// Return the adjacency list index of a variable	
 	private int getIndex (String var){
 		int index;
-		//Check if var is already in variables, otherwise add it 
+		// check if var is already in variables, otherwise add it 
 		if (variables.containsKey(var)){
 			index = variables.get(var);
 		} else {
@@ -19,20 +29,33 @@ public class movlangCustomListener extends movlangBaseListener{
 		return index;
 	}
 
-	// Add a node and store in name and adjList index in hashmap, return index
-	private int addNode(String name){
-		int index = adjList.size();
-		variables.put(name, index);
-		adjList.add(new ArrayList<Integer>());
-		return index;
+	// Ad an edge from one nodes index to another
+	private void addEdge(int from, int to){
+		adjList.get(from).add(to);
 	}
+
+	// Store subset constraint as array [a,b] where a is subset of b
+	private String[] storeSubsetConstraint (String a, String b){
+		String[] subset = new String[]{a,b};
+		subsetConstraints.add(subset);	
+		return subset;	
+	}
+
+	// Solve subset constraint 
+	private void solveSubsetConstraint(String[] subsetConstraint){
+		int idxA = getIndex(subsetConstraint[0]);
+		int idxB = getIndex(subsetConstraint[1]);
+		subsetOf(adjList.get(idxA), adjList.get(idxB));		
+	};
 	
 	// add elements in list A to list B so that list A will be a subset of list B 
 	private void subsetOf(ArrayList<Integer> listA, ArrayList<Integer> listB){
 		if (listA.size() > 0){
 			for(Iterator<Integer> listIterator = listA.iterator(); listIterator.hasNext();){			
-				int elem = listIterator.next();				
-				listB.add(elem);
+				int elem = listIterator.next();	
+				if (!listB.contains(elem)){			
+					listB.add(elem);
+				}
 			}
 		}
 	}
@@ -67,9 +90,8 @@ public class movlangCustomListener extends movlangBaseListener{
 	public void exitRegToReg(movlangParser.RegToRegContext ctx) {
 		String regA = ctx.REG().get(0).getText();
 		String regB = ctx.REG().get(1).getText();
-		int idxA = getIndex(regA);
-		int idxB = getIndex(regB);
-		subsetOf(adjList.get(idxB), adjList.get(idxA));
+		String[] subsetConstraint = storeSubsetConstraint(regB, regA); // pts(regB) is a subset of pts(regA)
+		solveSubsetConstraint(subsetConstraint); 
 		System.out.println("Copy contents of " + regB + " into " + regA + "\n");
 	}
 
@@ -82,9 +104,8 @@ public class movlangCustomListener extends movlangBaseListener{
 			mem = ctx.mem().address().HEX_NUMBER().getText();
 		}
 		String reg = ctx.REG().getText();
-		int idxReg = getIndex(reg);
-		int idxMem = getIndex(mem);
-		subsetOf(adjList.get(idxReg), adjList.get(idxMem));
+		String[] subsetConstraint = storeSubsetConstraint(reg, mem); // pts(reg) is a subset of pts(mem)
+		solveSubsetConstraint(subsetConstraint); 
                 System.out.println("Copy contents of " + reg + " to memory location at address " + mem);
 	}
 
@@ -117,7 +138,6 @@ public class movlangCustomListener extends movlangBaseListener{
 			int idxCon = getIndex(con);
 			int idxReg = getIndex(reg);
 			adjList.get(idxReg).add(idxCon);
-			locations.add(con);
                 	System.out.println("Store the address " + con + " in " + reg);
 		}
 	}
@@ -141,14 +161,30 @@ public class movlangCustomListener extends movlangBaseListener{
                         int idxCon = getIndex(con);
                         int idxMem = getIndex(mem);
                         adjList.get(idxMem).add(idxCon);
-                        locations.add(con);
                         System.out.println("Store the address " + con + " at memory location " + mem);
                 }
  
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void exitProgram(movlangParser.ProgramContext ctx) {
+		boolean completed = false;
+		// Iteratively solve subset constraints until graph doesn't change anymore
+		while (completed == false ){
+			ArrayList<ArrayList<Integer>> initialGraph = new ArrayList<ArrayList<Integer>>(); //2d arraylist to represent adjacency list
+			// copy graph to initialgraph
+			for (int i = 0; i < adjList.size(); i++) {
+				ArrayList<Integer> row = (ArrayList<Integer>) adjList.get(i).clone();
+				initialGraph.add(row);
+			}
+			for (String[] subset : subsetConstraints){
+				solveSubsetConstraint(subset);
+			}
+			if (initialGraph.equals(adjList)){
+				completed = true;
+			}
+		}
 		System.out.println("There are " + variables.size() + " variables\n");
 		printGraph(adjList);
 	}
