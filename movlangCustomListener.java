@@ -30,8 +30,10 @@ public class movlangCustomListener extends movlangBaseListener{
 	}
 
 	// Ad an edge from one nodes index to another
-	private void addEdge(int from, int to){
-		adjList.get(from).add(to);
+	private void addEdge(String from, String to){
+		int idxA = getIndex(from);
+		int idxB = getIndex(to);
+		adjList.get(idxA).add(idxB);
 	}
 
 	// Store subset constraint as array [a,b] where a is subset of b
@@ -119,9 +121,8 @@ public class movlangCustomListener extends movlangBaseListener{
                 }
 
 		String reg = ctx.REG().getText();
-		int idxMem = getIndex(mem);
-		int idxReg = getIndex(reg);
-		subsetOf(adjList.get(idxMem), adjList.get(idxReg));
+		String[] subsetConstraint = storeSubsetConstraint(mem, reg); // pts(mem) is a subset of pts(reg)
+		solveSubsetConstraint(subsetConstraint); 
                 System.out.println("Copy contents at memory location with address " + mem + " into " + reg);
 	}
 
@@ -135,9 +136,7 @@ public class movlangCustomListener extends movlangBaseListener{
 			System.out.println("Store constant " + con + " in " + reg);
 		} else {
 			con = ctx.constant().HEX_NUMBER().getText(); // constant is of type 0xFFFFFF
-			int idxCon = getIndex(con);
-			int idxReg = getIndex(reg);
-			adjList.get(idxReg).add(idxCon);
+			addEdge(reg, con); // add an edge in the graph from reg to con
                 	System.out.println("Store the address " + con + " in " + reg);
 		}
 	}
@@ -158,9 +157,7 @@ public class movlangCustomListener extends movlangBaseListener{
                         //System.out.println("Store constant " + con + " at memory location " + mem);
                 } else {
                         con = ctx.constant().HEX_NUMBER().getText(); // constant is of type 0xFFFFFF
-                        int idxCon = getIndex(con);
-                        int idxMem = getIndex(mem);
-                        adjList.get(idxMem).add(idxCon);
+                        addEdge(mem, con); // add an edge in the graph from mem to con
                         System.out.println("Store the address " + con + " at memory location " + mem);
                 }
  
