@@ -8,6 +8,9 @@ public class movlangCustomListener extends movlangBaseListener{
 	private ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>(); 	// 2d arraylist to represent adjacency list
 	private HashMap<String, Integer> variables = new HashMap<String, Integer>(); 		// hashmap to map each variable name to an adjacency list index
 	private ArrayList<String[]> subsetConstraints = new ArrayList<>(); 			// Store subset constraints as list of arrays [a,b] where a is subset of b
+	private int addressLowerBound;
+	private int addressUpperBound;
+	private boolean addressRangeEntered;
 
 	// Add a node and store name and adjList index in hashmap, return index
 	private int addNode(String name){
@@ -85,8 +88,43 @@ public class movlangCustomListener extends movlangBaseListener{
            	System.out.println();
         }
 
+	public static int hex2decimal(String s) {
+		String digits = "0123456789ABCDEF";
+		s = s.toUpperCase();
+		int val = 0;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			int d = digits.indexOf(c);
+			val = 16*val + d;
+		}
+		return val;
+	}
+
+	private boolean isAddress (String s) {
+		int decimalString = hex2decimal(s);
+		return (decimalString > addressLowerBound && decimalString < addressUpperBound);	
+	}
+
 
 	/* Override movlangBaseListener methods for custom implementation of ANTLR parser */
+
+	@Override
+	public void enterProgram(movlangParser.ProgramContext ctx) {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.print("Enter the range of absolute addresses hexadecimal in the format '0000FFFF FFFFFFF',\nalternatively, press 'enter' for default range: ");
+			String input1 = scanner.next();  // Read user input
+			if (input1 == ""){
+				System.out.println("No address range entered");
+				addressRangeEntered = false;
+			} else {
+				addressRangeEntered = true;
+				addressLowerBound = hex2decimal(input1);
+				String input2 = scanner.next();
+				addressUpperBound = hex2decimal(input2);
+				System.out.println("Address range: " + input1 + "-" + input2);
+			}
+		}
+	}
 
 	@Override
 	public void exitRegToReg(movlangParser.RegToRegContext ctx) {
