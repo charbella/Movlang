@@ -5,19 +5,19 @@ movlang.g4 contains the grammar of Movlang.
 
 # How to use
 
-Generate parser for grammar (run this command when changes are made to the grammar):
-java -jar antlr-4.7.1-complete.jar movlang.g4
+Clone directory
+git clone https://github.com/charbella/Movlang
 
 Compile code:
-javac -cp ./antlr-4.7.1-complete.jar *.java\
+javac -cp ./antlr-4.7.1-complete.jar *.java
 
 Save input program in file called input.movlang
 
-Execute parser GUI:
-java -cp .:antlr-4.7.1-complete.jar org.antlr.v4.gui.TestRig movlang program -gui input.movlang
-
 Execute pointer analysis:
 java -cp .:antlr-4.7.1-complete.jar Movlang
+
+Optional: Execute parser GUI:
+java -cp .:antlr-4.7.1-complete.jar org.antlr.v4.gui.TestRig movlang program -gui input.movlang
 
 # Example
 

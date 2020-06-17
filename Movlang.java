@@ -1,3 +1,4 @@
+/* java -jar antlr-4.7.1-complete.jar movlang.g4 to generate parser */
 import org.antlr.v4.runtime.*;
 import java.io.*;
 public class Movlang {
