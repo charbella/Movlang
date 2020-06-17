@@ -1,9 +1,8 @@
 grammar movlang;
 
 program : statement+;
-statement : constant ':' instruction | instruction;
 
-instruction : regToReg | regToMem | memToReg | conToReg | conToMem ;
+statement : regToReg | regToMem | memToReg | conToReg | conToMem ;
 
 regToReg : 'mov' REG ',' REG;
 regToMem : 'mov' mem ',' REG;

@@ -1,0 +1,4 @@
+mov DWORD PTR [eax], 0
+mov DWORD PTR [ebx], 1 
+mov rdi, DWORD PTR [rax]
+mov DWORD PTR[rsp-4+4*rdi], 0x11111111

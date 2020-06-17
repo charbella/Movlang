@@ -27,16 +27,6 @@ public interface movlangListener extends ParseTreeListener {
 	 */
 	void exitStatement(movlangParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link movlangParser#instruction}.
-	 * @param ctx the parse tree
-	 */
-	void enterInstruction(movlangParser.InstructionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link movlangParser#instruction}.
-	 * @param ctx the parse tree
-	 */
-	void exitInstruction(movlangParser.InstructionContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link movlangParser#regToReg}.
 	 * @param ctx the parse tree
 	 */

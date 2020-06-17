@@ -39,18 +39,6 @@ public class movlangBaseListener implements movlangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInstruction(movlangParser.InstructionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInstruction(movlangParser.InstructionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRegToReg(movlangParser.RegToRegContext ctx) { }
 	/**
 	 * {@inheritDoc}

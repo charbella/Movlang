@@ -1,0 +1,4 @@
+mov ds:0xFFFFFF00, 0xFFFFFF08
+mov eax, DWORD PTR ds:0xFFFFFF00
+mov ds:0xFFFFFF04, eax
+mov ds:0xFFFFFF00, 0xFFFFFF0C

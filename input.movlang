@@ -1,0 +1,9 @@
+mov ds:0xFFFFFF10, 0xFFFFFF00
+mov ds:0xFFFFFF14, 0xFFFFFF04
+mov ds:0xFFFFFF18, 0xFFFFFF08
+mov eax , DWORD PTR   ds:0xFFFFFF10 
+mov ds:0xFFFFFF20 , eax
+mov eax , DWORD PTR ds:0xFFFFFF14 
+mov ds:0xFFFFFF24 , eax
+mov eax , DWORD PTR ds:0xFFFFFF18 
+mov ds:0xFFFFFF28 , eax
