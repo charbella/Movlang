@@ -104,10 +104,8 @@ public class movlangCustomListener extends movlangBaseListener{
 	}
 
 	private boolean isAddress (String s) {
-		System.out.print(s + " =");
 		long decimalString = hex2decimal(s);
 		if (addressRangeEntered == true){
-			System.out.print(decimalString + "\n");
 			return (decimalString >= addressLowerBound && decimalString <= addressUpperBound);
 		} else {
 			return true;
@@ -132,7 +130,6 @@ System.out.print("- enter upper bound, then press 'enter' \n ");
 				String input2 = scanner.nextLine();
 				addressUpperBound = hex2decimal(input2);
 				System.out.println("Address range: " + input1 + "-" + input2);
-				System.out.println("In dec: " + addressLowerBound + "-" + addressUpperBound);
 			}
 		}
 	}

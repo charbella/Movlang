@@ -8,6 +8,9 @@ movlang.g4 contains the grammar of Movlang.
 Clone directory
 git clone https://github.com/charbella/Movlang
 
+Enter directory
+cd Movlang
+
 Compile code:
 javac -cp ./antlr-4.7.1-complete.jar *.java
 
